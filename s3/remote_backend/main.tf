@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "this" {
   bucket = bucket_suffix == null ? var.bucket : "${var.bucket}-${var.bucket_suffix}"
 
   tags = {
-    Version = "0.2.1"
+    Version = "0.3.1"
     Encryption = var.encryption
   }
 
