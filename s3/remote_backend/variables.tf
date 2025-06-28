@@ -9,3 +9,10 @@ variable "bucket_suffix" {
   type = string
   default = null
 }
+
+variable "encryption" {
+  description = "default encryption that will be applied to the bucket"
+  type = string
+  #options AES256, aws:kms, aws:kms:dsse
+  default = "AES256"
+}
