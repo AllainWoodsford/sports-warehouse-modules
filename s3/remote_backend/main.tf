@@ -5,8 +5,8 @@ resource "aws_s3_bucket" "this" {
   bucket = bucket_suffix == null ? var.bucket : "${var.bucket}-${var.bucket_suffix}"
   
   tags = {
-    Version = "0.2.0"
-    Encryption = ""
+    Version = "0.2.1"
+    Encryption = var.encryption
   }
 
   # Prevent accidental deletion of this S3 bucket
@@ -30,7 +30,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
 
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm = try(var.encryption,"AES256")
+      sse_algorithm = var.encryption
     }
   }
 }
