@@ -4,9 +4,9 @@
 resource "aws_s3_bucket" "this" {
   # Bucket name needs to be unique can include optional suffix
   bucket = bucket_suffix == null ? var.bucket : "${var.bucket}-${var.bucket_suffix}"
-
+  
   tags = {
-    Version = "0.3.1"
+    Version = "0.4.2"
     Encryption = var.encryption
   }
 
