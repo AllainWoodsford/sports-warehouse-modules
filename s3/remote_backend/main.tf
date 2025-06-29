@@ -27,7 +27,7 @@ resource "aws_s3_bucket_versioning" "enabled" {
 
 # Enable server-side encryption by default
 resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
-  bucket = aws_s3_bucket.this
+  bucket = aws_s3_bucket.this.id
 
   rule {
     apply_server_side_encryption_by_default {
@@ -38,7 +38,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
 
 # Explicitly block all public access to the S3 Bucket
 resource "aws_s3_bucket_public_access_block" "deny" {
-  bucket = aws_s3_bucket.this
+  bucket = aws_s3_bucket.this.id
   block_public_acls = true
   block_public_policy = true
   ignore_public_acls = true
