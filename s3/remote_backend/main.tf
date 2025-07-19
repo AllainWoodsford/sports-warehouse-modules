@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "this" {
   bucket = var.bucket_suffix == null ? var.bucket : "${var.bucket}-${var.bucket_suffix}"
   
   tags = {
-    Version = "0.4.4"
+    Version = "0.4.5"
     Encryption = var.encryption
   }
 
@@ -61,7 +61,7 @@ data "aws_iam_policy_document" "policydata" {
     ]
     resources = [
       aws_s3_bucket.this.arn,
-      "${aws_s3_bucket.example_bucket.arn}/*"
+      "${aws_s3_bucket.this.arn}/*"
     ]
   }
 }
