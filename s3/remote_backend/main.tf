@@ -6,13 +6,13 @@ resource "aws_s3_bucket" "this" {
   bucket = var.bucket_suffix == null ? var.bucket : "${var.bucket}-${var.bucket_suffix}"
   
   tags = {
-    Version = "0.4.6"
+    Version = "0.4.7"
     Encryption = var.encryption
   }
 
   # Prevent accidental deletion of this S3 bucket
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = var.prevent_destroy
   }
 }
 
