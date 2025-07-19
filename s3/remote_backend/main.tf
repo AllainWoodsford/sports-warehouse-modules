@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "this" {
   bucket = var.bucket_suffix == null ? var.bucket : "${var.bucket}-${var.bucket_suffix}"
   
   tags = {
-    Version = "0.4.5"
+    Version = "0.4.6"
     Encryption = var.encryption
   }
 
@@ -66,9 +66,34 @@ data "aws_iam_policy_document" "policydata" {
   }
 }
 
+data "aws_iam_policy_document" "lockpolicydata" {
+  statement {
+    sid    = "AllowTerraformAccess"
+    effect = "Allow"
+    principals {
+      type        = "AWS"
+      identifiers = [var.user_arn] # Replace with your role ARN
+    }
+    actions = [
+      "s3:DeleteObject"
+    ]
+    resources = [
+      "${aws_s3_bucket.this.arn}/${var.lock_file_path}"
+    ]
+  }
+}
+
 resource "aws_s3_bucket_policy" "policy" {
   #we don't attach the policy if there isn't an arn entered
   count = length(var.user_arn) > 1 ? 1 : 0
   bucket = aws_s3_bucket.this.id
   policy = data.aws_iam_policy_document.policydata.json
+}
+
+resource "aws_s3_bucket_policy" "lockpolicy" {
+  count = length(var.lock_file_path) > 1 ? 1 : 0
+  bucket = aws_s3_bucket.this.id
+  policy = data.aws_iam_policy_document.lockpolicydata.json
+
+  depends_on = [ aws_s3_bucket_policy.policy ]
 }
