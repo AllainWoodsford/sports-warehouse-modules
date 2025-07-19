@@ -22,3 +22,9 @@ variable "user_arn" {
   type = string
   default = ""
 }
+
+variable "lock_file_path" {
+  description = "does not need starting / character i.e. state/terraform.tfstate.tflock"
+  type = string
+  default = ""
+}
