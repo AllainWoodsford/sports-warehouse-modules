@@ -16,3 +16,9 @@ variable "encryption" {
   #options AES256, aws:kms, aws:kms:dsse
   default = "AES256"
 }
+
+variable "user_arn" {
+  description = "full ARN as string i.e.arn:aws:iam::<ID>:user/terraform-user"
+  type = string
+  default = ""
+}
