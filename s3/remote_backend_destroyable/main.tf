@@ -65,7 +65,7 @@ data "aws_iam_policy_document" "policydata" {
     ]
   }
   statement {
-     sid    = "AllowTerraformAccess"
+     sid    = "AllowTerraformAccessLockFile"
     effect = "Allow"
     principals {
       type        = "AWS"
