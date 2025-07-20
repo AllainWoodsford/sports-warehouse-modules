@@ -7,12 +7,12 @@ resource "aws_s3_bucket" "this" {
   bucket = var.bucket_suffix == null ? var.bucket : "${var.bucket}-${var.bucket_suffix}"
 
   tags = {
-    Version    = "0.0.1"
+    Version    = "0.0.2"
     Encryption = var.encryption
   }
 
   #This is a destroyable backend for testing
-  
+
 }
 
 
