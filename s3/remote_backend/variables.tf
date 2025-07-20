@@ -28,10 +28,3 @@ variable "lock_file_path" {
   type        = string
   default     = ""
 }
-
-#only for testing purposes we should set this to false
-variable "prevent_destroy" {
-  description = "default is true uses the life cycle on the bucket"
-  type        = bool
-  default     = true
-}
